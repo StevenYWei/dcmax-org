@@ -15,6 +15,18 @@ public class RegisterForm {
     @Size(min=1, max=50)
     private String rePassword;
 
+    @NotNull
+    @Size(min=1, max=50)
+    private String firstName;
+
+    @NotNull
+    @Size(min=1, max=50)
+    private String lastName;
+
+    @NotNull
+    @Size(min=1, max=50)
+    private String email;
+
     public String getUsername() {
         return username;
     }
@@ -37,5 +49,29 @@ public class RegisterForm {
 
     public void setRePassword(String rePassword) {
         this.rePassword = rePassword;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
