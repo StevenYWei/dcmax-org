@@ -1,9 +1,11 @@
 package dcmax.models;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "eventtypes")
-public class EventType {
+public class EventType
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,8 +18,10 @@ public class EventType {
     //party
 
     public Long getId() { return id; }
+
     public void setId(Long id) { this.id = id; }
 
     public String getEventType() { return eventType;}
+
     public void setEventType(String eventType) { this.eventType = eventType; }
 }

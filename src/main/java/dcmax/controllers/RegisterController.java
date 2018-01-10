@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-public class RegisterController {
+public class RegisterController
+{
 
     @Autowired
     private UserService userService;
@@ -22,19 +23,23 @@ public class RegisterController {
     private NotificationService notifyService;
 
     @RequestMapping("/users/register")
-    public String register(RegisterForm registerForm) {
+    public String register(RegisterForm registerForm)
+    {
         return "users/register";
     }
 
     @RequestMapping(value = "/users/register", method = RequestMethod.POST)
-    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+        {
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "users/register";
         }
 
         if (!userService.twoPasswordMatch(
-                registerForm.getUsername(), registerForm.getRePassword())) {
+                registerForm.getUsername(), registerForm.getRePassword()))
+        {
             notifyService.addErrorMessage("Passwords don't match!");
             return "users/register";
         }

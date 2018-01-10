@@ -7,7 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,30 +48,77 @@ public class User {
     private Set<Event> events = new HashSet<Event>();
 
     public Long getId() { return id; }
+
     public void setId(Long id) { this.id = id; }
+
     public String getUsername() { return username;}
-    public void setUsername(String username) { this.username = username; setLastUpdateTime(new Date());}
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+        setLastUpdateTime(new Date());
+    }
+
     public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passHash) { this.passwordHash = passHash; setLastUpdateTime(new Date());}
+
+    public void setPasswordHash(String passHash)
+    {
+        this.passwordHash = passHash;
+        setLastUpdateTime(new Date());
+    }
+
     public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; setLastUpdateTime(new Date());}
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+        setLastUpdateTime(new Date());
+    }
+
     public String getMiddleName() { return middleName; }
-    public void setMiddleName(String middleName) { this.middleName = middleName; setLastUpdateTime(new Date());}
+
+    public void setMiddleName(String middleName)
+    {
+        this.middleName = middleName;
+        setLastUpdateTime(new Date());
+    }
+
     public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; setLastUpdateTime(new Date());}
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+        setLastUpdateTime(new Date());
+    }
+
     public String getEmail() { return lastName; }
-    public void setEmail(String email) { this.lastName = lastName; setLastUpdateTime(new Date());}
+
+    public void setEmail(String email)
+    {
+        this.lastName = lastName;
+        setLastUpdateTime(new Date());
+    }
+
     public Date getCreateTime() { return createTime;}
+
     public void setCreateTime(Date createTime) { this.createTime = createTime;}
+
     public Date getLastUpdateTime() { return lastUpdatedTime;}
+
     public void setLastUpdateTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
+
     public Role getRole() { return role; }
+
     public void setRole(Role role) { this.role = role; }
+
     public Set<Post> getPosts() { return posts; }
+
     public void setPosts(Set<Post> posts) { this.posts = posts; }
 
     public User() { }
-    public User(Long id, String username, String firstName, String lastName) {
+
+    public User(Long id, String username, String firstName, String lastName)
+    {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -78,7 +126,8 @@ public class User {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "User{" + "id=" + id + ", username='" + username + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", First Name='" + firstName + '\'' +
