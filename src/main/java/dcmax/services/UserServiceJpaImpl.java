@@ -49,7 +49,12 @@ public class UserServiceJpaImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return this.userRepo.findByUsername(username);
+        return this.userRepo.findByUsernameIgnoreCase(username);
+    }
+
+    @Override
+    public boolean usernameExists(String username) {
+        return findByUsername(username) != null;
     }
 
     @Override
@@ -88,22 +93,14 @@ public class UserServiceJpaImpl implements UserService {
     }
 
 //    @Override
-//    public void register(User user)
-//    {
-////        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setUsername(user.getUsername());
-//        user.setPassword(user.getPassword());
-//        user.setEmail(user.getEmail());
-//        user.setFirstName("");
-//        user.setLastName("");
+//    public User currentUser() {
+////        if (!isAuthenticated())
+////            return null;
 //
-////        user.getRoles().add(roleRepository.findByName("ROLE_USER"));
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
 //
-////        user.setEnabled(true);
+//        Authentication auth = securityContext.getAuthentication();
 //
-//        user.setCreateTime(new Date());
-//        user.setLastUpdateTime(new Date());
-//
-//        userRepo.saveAndFlush(user);
+//        return userRepository.findByUsernameIgnoreCase(auth.getName());
 //    }
 }

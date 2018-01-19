@@ -12,6 +12,8 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    boolean usernameExists(String username);
+
     User create(User user);
 
     User edit(User user);
@@ -24,4 +26,5 @@ public interface UserService {
 
     boolean twoPasswordMatch(String password, String rePassword);
 
+//    User currentUser();
 }

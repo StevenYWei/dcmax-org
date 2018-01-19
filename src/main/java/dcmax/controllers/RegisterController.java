@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,9 @@ public class RegisterController {
 
     @Autowired
     private NotificationService notifyService;
+
+    @Autowired
+    private Validator userValidator;
 
     @RequestMapping("/users/register")
     public String register(RegisterForm registerForm) {
@@ -49,12 +53,18 @@ public class RegisterController {
         user.setEmail(StringUtils.trimWhitespace(registerForm.getEmail()));
         user.setCreateTime(new Date());
         user.setLastUpdateTime(new Date());
-//        userValidator.validate(user, result);
+
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            notifyService.addErrorMessage("User already exists or registered!");
+            return "users/register";
+        }
+
         try {
             userService.registerUser(user);
         } catch (Exception e) {
             notifyService.addErrorMessage("Error in registeration!");
-            return "redirect:/";
+            return "users/register";
         }
 
         notifyService.addInfoMessage("Register successful");
@@ -64,7 +74,6 @@ public class RegisterController {
 //    @RequestMapping(value = "/users/register", method = RequestMethod.POST)
 //    public String registerUser(/*@Validated({User.CreateValidationGroup.class}) @ModelAttribute(value = "user") */User user, BindingResult bindingResult, HttpSession session)
 //    {
-//
 //
 //        if (bindingResult.hasErrors())
 //        {
