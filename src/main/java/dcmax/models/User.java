@@ -14,10 +14,17 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
-    public interface CreateValidationGroup {}
-    public interface ChangeEmailValidationGroup {}
-    public interface ChangePasswordValidationGroup {}
-    public interface ProfileInfoValidationGroup {}
+    public interface CreateValidationGroup {
+    }
+
+    public interface ChangeEmailValidationGroup {
+    }
+
+    public interface ChangePasswordValidationGroup {
+    }
+
+    public interface ProfileInfoValidationGroup {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +71,12 @@ public class User {
 
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
@@ -135,9 +148,17 @@ public class User {
 
     public void setLastUpdateTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
 
+    public Set<Role> getRoles() { return roles; }
+
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
+
     public Set<Post> getPosts() { return posts; }
 
     public void setPosts(Set<Post> posts) { this.posts = posts; }
+
+    public Set<Event> getEvents() { return events; }
+
+    public void setEvents(Set<Event> events) { this.events = events; }
 
     public User() { }
 

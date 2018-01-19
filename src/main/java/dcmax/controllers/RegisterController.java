@@ -1,6 +1,7 @@
 package dcmax.controllers;
 
 import dcmax.forms.RegisterForm;
+import dcmax.models.Role;
 import dcmax.models.User;
 import dcmax.services.NotificationService;
 import dcmax.services.UserService;
@@ -48,9 +49,11 @@ public class RegisterController {
         }
 
         User user = new User();
+        Role newMember = new Role("Member");
         user.setUsername(StringUtils.trimWhitespace(registerForm.getUsername()));
         user.setPassword(StringUtils.trimWhitespace(registerForm.getPassword()));
         user.setEmail(StringUtils.trimWhitespace(registerForm.getEmail()));
+        user.getRoles().add(newMember);
         user.setActive(true);
         user.setCreateTime(new Date());
         user.setLastUpdateTime(new Date());

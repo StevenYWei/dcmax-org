@@ -1,6 +1,8 @@
 package dcmax.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -15,6 +17,16 @@ public class Role {
     //captain
     //organizer
     //management
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+
+    public Role() {}
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Long getId() { return id; }
 
