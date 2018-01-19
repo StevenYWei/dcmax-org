@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class PostsController
-{
+public class PostsController {
     @Autowired
     private PostService postService;
 
@@ -19,11 +18,9 @@ public class PostsController
     private NotificationService notifyService;
 
     @RequestMapping("/posts/view/{id}")
-    public String view(@PathVariable("id") Long id, Model model)
-    {
+    public String view(@PathVariable("id") Long id, Model model) {
         Post post = postService.findById(id);
-        if (post == null)
-        {
+        if (post == null) {
             notifyService.addErrorMessage("Cannot find post #" + id);
             return "redirect:/";
         }

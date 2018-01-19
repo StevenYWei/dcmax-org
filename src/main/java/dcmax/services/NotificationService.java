@@ -1,7 +1,6 @@
 package dcmax.services;
 
-public interface NotificationService
-{
+public interface NotificationService {
     void addInfoMessage(String msg);
 
     void addErrorMessage(String msg);

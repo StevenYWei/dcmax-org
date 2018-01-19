@@ -4,8 +4,7 @@ import dcmax.models.Event;
 
 import java.util.List;
 
-public interface EventService
-{
+public interface EventService {
     List<Event> findAll();
 
     List<Event> findLatest5();

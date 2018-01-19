@@ -11,14 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class HomeController
-{
+public class HomeController {
     @Autowired
     private PostService postService;
 
     @RequestMapping("/")
-    public String index(Model model)
-    {
+    public String index(Model model) {
         List<Post> latest5Posts = postService.findLatest5();
         model.addAttribute("latest5posts", latest5Posts);
 

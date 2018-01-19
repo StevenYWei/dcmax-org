@@ -4,8 +4,7 @@ import dcmax.models.Post;
 
 import java.util.List;
 
-public interface PostService
-{
+public interface PostService {
     List<Post> findAll();
 
     List<Post> findLatest5();

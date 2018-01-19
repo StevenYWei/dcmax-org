@@ -29,11 +29,6 @@ public class LoginController {
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("error here!!!");
-            System.out.println(loginForm.getUsername());
-            System.out.println(loginForm.getPassword());
-            User valUser = userService.findByUsername(loginForm.getUsername());
-            System.out.println(valUser.getPassword());
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "users/login";
         }

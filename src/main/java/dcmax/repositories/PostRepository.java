@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long>
-{
+public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p LEFT JOIN FETCH p.author ORDER BY p.lastUpdatedTime DESC")
     List<Post> findLatest5Posts(Pageable pageable);
 }
