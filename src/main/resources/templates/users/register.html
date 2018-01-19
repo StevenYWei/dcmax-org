@@ -3,6 +3,7 @@
 
 <head th:replace="layout :: site-head">
     <title>Login</title>
+    <script src="../../js/registration.js" th:src="@{/js/registration.js}"></script>
 </head>
 
 <body>
@@ -11,33 +12,38 @@
 
 <h1>New user register</h1>
 
-<form method="post" th:object="${registerForm}">
+<script th:inline="javascript">
+    window.emailCheckUrl = /*[[@{/check_email}]]*/ '';
+    window.usernameCheckUrl = /*[[@{/check_username}]]*/ '';
+</script>
+
+<form method="post" th:object="${registerForm}" id="registerForm">
     <div><label for="username">Username:</label></div>
     <input id="username" type="text" name="username" th:value="*{username}"/>
     <span class="formError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Invalid username</span>
 
     <div><label for="password" th:value="*{password}">Password:</label></div>
-    <input id="password" type="password" name="password" th:value="*{password}"/>
+    <input id="password" type="text" name="password" th:value="*{password}"/>
     <span class="formError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</span>
 
-    <div><label for="rePassword" th:value="*{rePassword}">Re-Enter Password:</label></div>
-    <input id="rePassword" type="password" name="password" th:value="*{rePassword}"/>
+    <div><label for="rePassword" th:value="*{rePassword}">Repeat password:</label></div>
+    <input id="rePassword" type="text" name="rePassword" th:value="*{rePassword}"/>
     <span class="formError" th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">Passwords don't
                                                                                                  match!</span>
 
-    <div><label for="firstName">First Name:</label></div>
-    <input id="firstName" type="text" name="firstName" th:value="*{firstName}"/>
-    <span class="formError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Invalid inputs</span>
+    <!--<div><label for="firstName">First Name:</label></div>-->
+    <!--<input id="firstName" type="text" name="firstName" th:value="*{firstName}"/>-->
+    <!--<span class="formError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Invalid inputs</span>-->
 
-    <div><label for="lastName">Last Name:</label></div>
-    <input id="lastName" type="text" name="lastName" th:value="*{lastName}"/>
-    <span class="formError" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Invalid inputs</span>
+    <!--<div><label for="lastName">Last Name:</label></div>-->
+    <!--<input id="lastName" type="text" name="lastName" th:value="*{lastName}"/>-->
+    <!--<span class="formError" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Invalid inputs</span>-->
 
     <div><label for="email">Email:</label></div>
     <input id="email" type="text" name="Email" th:value="*{email}"/>
     <span class="formError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid inputs</span>
 
-    <div><input type="submit" value="Submit"/>Submit</div>
+    <div><input type="submit" value="Register"/></div>
 </form>
 
 <footer th:replace="layout :: site-footer"/>

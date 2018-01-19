@@ -2,15 +2,21 @@ package dcmax.controllers;
 
 import dcmax.forms.LoginForm;
 import dcmax.forms.RegisterForm;
+import dcmax.models.User;
 import dcmax.services.NotificationService;
 import dcmax.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 public class RegisterController
@@ -44,7 +50,47 @@ public class RegisterController
             return "users/register";
         }
 
+        User user = new User();
+
+        user.setUsername(StringUtils.trimWhitespace(registerForm.getUsername()));
+        user.setPassword(StringUtils.trimWhitespace(registerForm.getPassword()));
+        user.setEmail(StringUtils.trimWhitespace(registerForm.getEmail()));
+//        user.setFirstNameEng("");
+//        user.setLastNameEng("");
+        user.setCreateTime(new Date());
+        user.setLastUpdateTime(new Date());
+//        userValidator.validate(user, result);
+        try
+        {
+            userService.registerUser(user);
+        }
+        catch(Exception e)
+        {
+            notifyService.addErrorMessage("Error in registeration!");
+            return "redirect:/";
+        }
+
         notifyService.addInfoMessage("Register successful");
         return "redirect:/";
     }
+
+//    @RequestMapping(value = "/users/register", method = RequestMethod.POST)
+//    public String registerUser(/*@Validated({User.CreateValidationGroup.class}) @ModelAttribute(value = "user") */User user, BindingResult bindingResult, HttpSession session)
+//    {
+//
+//
+//        if (bindingResult.hasErrors())
+//        {
+//            return "users/register";
+//        }
+//
+//        userService.register(user);
+//
+//        return "users/login";
+//        userService.authenticate(user);
+//
+//        Object regRef = session.getAttribute("regRef");
+//
+//        return "redirect:" + (StringUtils.isEmpty(regRef) ? "posts" : regRef.toString());
+//    }
 }

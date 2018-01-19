@@ -22,4 +22,5 @@ public interface UserService
     boolean authenticate(String username, String password);
 
     boolean twoPasswordMatch(String password, String rePassword);
+
 }

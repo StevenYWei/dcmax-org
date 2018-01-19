@@ -7,9 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User
-{
-
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,26 +18,29 @@ public class User
     @Column(nullable = false, length = 60)
     private String passwordHash;
 
-    @Column(nullable = false, length = 20)
-    private String firstName;
+    @Column(nullable = false, length = 30, unique = true)
+    private String email;
 
     @Column(length = 20)
-    private String middleName;
+    private String firstNameEng;
 
-    @Column(nullable = false, length = 20)
-    private String lastName;
+    @Column(length = 20)
+    private String middleNameEng;
 
-    @Column(nullable = false, length = 20, unique = true)
-    private String email;
+    @Column(length = 20)
+    private String lastNameEng;
+
+    @Column(length = 20)
+    private String firstNameChn;
+
+    @Column(length = 20)
+    private String lastNameChn;
 
     @Column(nullable = false)
     private Date createTime = new Date();
 
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private Role role;
 
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
@@ -53,50 +54,56 @@ public class User
 
     public String getUsername() { return username;}
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
-        setLastUpdateTime(new Date());
     }
 
     public String getPasswordHash() { return passwordHash; }
 
-    public void setPasswordHash(String passHash)
-    {
+    public void setPasswordHash(String passHash) {
         this.passwordHash = passHash;
-        setLastUpdateTime(new Date());
     }
 
-    public String getFirstName() { return firstName; }
+    public String getPassword() { return passwordHash; }
 
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-        setLastUpdateTime(new Date());
+    public void setPassword(String pass) {
+        this.passwordHash = pass;
     }
 
-    public String getMiddleName() { return middleName; }
+    public String getFirstNameEng() { return firstNameEng; }
 
-    public void setMiddleName(String middleName)
-    {
-        this.middleName = middleName;
-        setLastUpdateTime(new Date());
+    public void setFirstNameEng(String firstNameEng) {
+        this.firstNameEng = firstNameEng;
     }
 
-    public String getLastName() { return lastName; }
+    public String getMiddleNameEng() { return middleNameEng; }
 
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-        setLastUpdateTime(new Date());
+    public void setMiddleNameEng(String middleNameEng) {
+        this.middleNameEng = middleNameEng;
     }
 
-    public String getEmail() { return lastName; }
+    public String getLastNameEng() { return lastNameEng; }
 
-    public void setEmail(String email)
-    {
-        this.lastName = lastName;
-        setLastUpdateTime(new Date());
+    public void setLastNameEng(String lastNameEng) {
+        this.lastNameEng = lastNameEng;
+    }
+
+    public String getFirstNameChn() { return firstNameChn; }
+
+    public void setFirstNameChn(String firstNameChn) {
+        this.firstNameChn = firstNameChn;
+    }
+
+    public String getLastNameChn() { return lastNameChn; }
+
+    public void setLastNameChn(String lastNameChn) {
+        this.lastNameChn = lastNameChn;
+    }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreateTime() { return createTime;}
@@ -107,31 +114,24 @@ public class User
 
     public void setLastUpdateTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
 
-    public Role getRole() { return role; }
-
-    public void setRole(Role role) { this.role = role; }
-
     public Set<Post> getPosts() { return posts; }
 
     public void setPosts(Set<Post> posts) { this.posts = posts; }
 
     public User() { }
 
-    public User(Long id, String username, String firstName, String lastName)
-    {
+    public User(Long id, String username, String firstNameEng, String lastNameEng) {
         this.id = id;
         this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstNameEng = firstNameEng;
+        this.lastNameEng = lastNameEng;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" + "id=" + id + ", username='" + username + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", First Name='" + firstName + '\'' +
-                ", Last Name='" + lastName + '\'' + '}';
+                ", First Name='" + firstNameEng + '\'' +
+                ", Last Name='" + lastNameEng + '\'' + '}';
     }
 }
 

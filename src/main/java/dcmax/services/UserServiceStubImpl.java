@@ -5,6 +5,7 @@ import dcmax.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,4 +62,23 @@ public class UserServiceStubImpl implements UserService
         return Objects.equals(password, rePassword);
     }
 
+//    @Override
+//    public void register(User user)
+//    {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setUsername(user.getUsername());
+//        user.setPassword(user.getPassword());
+//        user.setEmail(user.getEmail());
+//        user.setFirstName("");
+//        user.setLastName("");
+//
+////        user.getRoles().add(roleRepository.findByName("ROLE_USER"));
+//
+////        user.setEnabled(true);
+//
+//        user.setCreateTime(new Date());
+//        user.setLastUpdateTime(new Date());
+//
+//        userRepo.saveAndFlush(user);
+//    }
 }
