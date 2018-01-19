@@ -11,6 +11,8 @@ public interface UserService
 
     User findById(Long id);
 
+    User findByUsername(String username);
+
     User create(User user);
 
     User edit(User user);

@@ -28,6 +28,11 @@ public class UserServiceStubImpl implements UserService
     }
 
     @Override
+    public User findByUsername(String username){
+        return this.userRepo.findByUsername(username);
+    }
+
+    @Override
     public User create(User user)
     {
         return this.userRepo.save(user);

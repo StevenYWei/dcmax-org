@@ -1,6 +1,5 @@
 package dcmax.controllers;
 
-import dcmax.forms.LoginForm;
 import dcmax.forms.RegisterForm;
 import dcmax.models.User;
 import dcmax.services.NotificationService;
@@ -19,8 +18,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
-public class RegisterController
-{
+public class RegisterController {
 
     @Autowired
     private UserService userService;
@@ -29,43 +27,32 @@ public class RegisterController
     private NotificationService notifyService;
 
     @RequestMapping("/users/register")
-    public String register(RegisterForm registerForm)
-    {
+    public String register(RegisterForm registerForm) {
         return "users/register";
     }
 
     @RequestMapping(value = "/users/register", method = RequestMethod.POST)
-    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
-    {
-        if (bindingResult.hasErrors())
-        {
+    public String registerPage(@Valid RegisterForm registerForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "users/register";
         }
 
-        if (!userService.twoPasswordMatch(
-                registerForm.getUsername(), registerForm.getRePassword()))
-        {
+        if (!userService.twoPasswordMatch(registerForm.getPassword(), registerForm.getRePassword())) {
             notifyService.addErrorMessage("Passwords don't match!");
             return "users/register";
         }
 
         User user = new User();
-
         user.setUsername(StringUtils.trimWhitespace(registerForm.getUsername()));
         user.setPassword(StringUtils.trimWhitespace(registerForm.getPassword()));
         user.setEmail(StringUtils.trimWhitespace(registerForm.getEmail()));
-//        user.setFirstNameEng("");
-//        user.setLastNameEng("");
         user.setCreateTime(new Date());
         user.setLastUpdateTime(new Date());
 //        userValidator.validate(user, result);
-        try
-        {
+        try {
             userService.registerUser(user);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             notifyService.addErrorMessage("Error in registeration!");
             return "redirect:/";
         }

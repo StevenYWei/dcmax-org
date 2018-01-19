@@ -26,8 +26,7 @@ import java.util.Objects;
 
 @Service
 @Primary
-public class UserServiceJpaImpl implements UserService
-{
+public class UserServiceJpaImpl implements UserService {
 
     @Autowired
     private UserRepository userRepo;
@@ -39,38 +38,37 @@ public class UserServiceJpaImpl implements UserService
 //    private PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> findAll()
-    {
+    public List<User> findAll() {
         return this.userRepo.findAll();
     }
 
     @Override
-    public User findById(Long id)
-    {
+    public User findById(Long id) {
         return this.userRepo.findOne(id);
     }
 
     @Override
-    public User create(User user)
-    {
+    public User findByUsername(String username) {
+        return this.userRepo.findByUsername(username);
+    }
+
+    @Override
+    public User create(User user) {
         return this.userRepo.save(user);
     }
 
     @Override
-    public User edit(User user)
-    {
+    public User edit(User user) {
         return this.userRepo.save(user);
     }
 
     @Override
-    public void deleteById(Long id)
-    {
+    public void deleteById(Long id) {
         this.userRepo.delete(id);
     }
 
     @Override
-    public void registerUser(User user)
-    {
+    public void registerUser(User user) {
         userRepo.saveAndFlush(user);
 //        String insertUserSql = "insert into users value (?,?,?,?,?,?,?,?)";
 //        KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -78,15 +76,13 @@ public class UserServiceJpaImpl implements UserService
     }
 
     @Override
-    public boolean authenticate(String username, String password)
-    {
+    public boolean authenticate(String username, String password) {
         // Provide a sample password check: username == password
         return Objects.equals(username, password);
     }
 
     @Override
-    public boolean twoPasswordMatch(String password, String rePassword)
-    {
+    public boolean twoPasswordMatch(String password, String rePassword) {
         // Provide a sample password check: password == rePassword
         return Objects.equals(password, rePassword);
     }
