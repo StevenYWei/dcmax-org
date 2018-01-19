@@ -51,6 +51,7 @@ public class RegisterController {
         user.setUsername(StringUtils.trimWhitespace(registerForm.getUsername()));
         user.setPassword(StringUtils.trimWhitespace(registerForm.getPassword()));
         user.setEmail(StringUtils.trimWhitespace(registerForm.getEmail()));
+        user.setActive(true);
         user.setCreateTime(new Date());
         user.setLastUpdateTime(new Date());
 

@@ -3,14 +3,12 @@ package dcmax.services;
 import dcmax.models.Event;
 import dcmax.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Primary
 public class EventServiceJpaImpl implements EventService {
 
     @Autowired

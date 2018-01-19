@@ -41,7 +41,6 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
 
-
     @Column(length = 20)
     private String firstNameEng;
 
@@ -56,6 +55,9 @@ public class User {
 
     @Column(length = 20)
     private String lastNameChn;
+
+    @Column(nullable = false)
+    private boolean isActive;
 
     @Column(nullable = false)
     private Date createTime = new Date();
@@ -120,6 +122,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isActive() { return isActive;}
+
+    public void setActive(boolean status) { this.isActive = status;}
 
     public Date getCreateTime() { return createTime;}
 
