@@ -1,5 +1,6 @@
 package dcmax.controllers;
 
+import dcmax.models.User;
 import dcmax.forms.LoginForm;
 import dcmax.services.NotificationService;
 import dcmax.services.UserService;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-public class LoginController
-{
+public class LoginController {
 
     @Autowired
     private UserService userService;
@@ -22,23 +22,24 @@ public class LoginController
     private NotificationService notifyService;
 
     @RequestMapping("/users/login")
-    public String login(LoginForm loginForm)
-    {
+    public String login(LoginForm loginForm) {
         return "users/login";
     }
 
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
-    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult)
-    {
-        if (bindingResult.hasErrors())
-        {
+    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("error here!!!");
+            System.out.println(loginForm.getUsername());
+            System.out.println(loginForm.getPassword());
+            User valUser = userService.findByUsername(loginForm.getUsername());
+            System.out.println(valUser.getPassword());
             notifyService.addErrorMessage("Please fill the form correctly!");
             return "users/login";
         }
 
-        if (!userService.authenticate(
-                loginForm.getUsername(), loginForm.getPassword()))
-        {
+        User valUser = userService.findByUsername(loginForm.getUsername());
+        if (!userService.authenticate(valUser.getPassword(), loginForm.getPassword())) {
             notifyService.addErrorMessage("Invalid login!");
             return "users/login";
         }
@@ -46,4 +47,5 @@ public class LoginController
         notifyService.addInfoMessage("Login successful");
         return "redirect:/";
     }
+
 }

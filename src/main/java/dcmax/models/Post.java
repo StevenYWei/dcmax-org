@@ -5,8 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "posts")
-public class Post
-{
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,48 +28,44 @@ public class Post
 
     public Long getId() { return id; }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
         setLastUpdateTime(new Date());
     }
 
     public String getTitle() { return title;}
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
-        setLastUpdateTime(new Date());
     }
 
     public String getBody() { return body;}
 
-    public void setBody(String body)
-    {
+    public void setBody(String body) {
         this.body = body;
-        setLastUpdateTime(new Date());
     }
 
     public User getAuthor() { return author;}
 
-    public void setAuthor(User author)
-    {
+    public void setAuthor(User author) {
         this.author = author;
-        setLastUpdateTime(new Date());
     }
 
     public Date getCreateTime() { return createTime;}
 
     public void setCreateTime(Date createTime) { this.createTime = createTime;}
 
-    public Date getLastUpdateTime() { return lastUpdatedTime;}
+    public Date getLastUpdateTime() {
+        return lastUpdatedTime;
+    }
 
-    public void setLastUpdateTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime;}
+    public void setLastUpdateTime(Date lastUpdatedTime) {
+        this.lastUpdatedTime = lastUpdatedTime;
+    }
 
     public Post() {}
 
-    public Post(Long id, String title, String body, User author)
-    {
+    public Post(Long id, String title, String body, User author) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -78,8 +73,7 @@ public class Post
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +

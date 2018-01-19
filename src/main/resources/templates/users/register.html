@@ -23,11 +23,11 @@
     <span class="formError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Invalid username</span>
 
     <div><label for="password" th:value="*{password}">Password:</label></div>
-    <input id="password" type="text" name="password" th:value="*{password}"/>
+    <input id="password" type="password" name="password" th:value="*{password}"/>
     <span class="formError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</span>
 
     <div><label for="rePassword" th:value="*{rePassword}">Repeat password:</label></div>
-    <input id="rePassword" type="text" name="rePassword" th:value="*{rePassword}"/>
+    <input id="rePassword" type="password" name="rePassword" th:value="*{rePassword}"/>
     <span class="formError" th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">Passwords don't
                                                                                                  match!</span>
 
