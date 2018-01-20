@@ -1,6 +1,8 @@
 package dcmax.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "eventtypes")
@@ -15,6 +17,13 @@ public class EventType {
     //tournament
     //match
     //party
+
+    @OneToMany(mappedBy = "eventLocation")
+    private Set<Event> events = new HashSet<Event>();
+
+    public EventType() {}
+
+    public EventType(String eventType) {this.eventType = eventType;}
 
     public Long getId() { return id; }
 

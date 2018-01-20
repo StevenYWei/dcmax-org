@@ -11,11 +11,11 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String eventName;
+    @Column(length = 100)
+    private String eventNameEng;
 
-    @Column(nullable = false, length = 300)
-    private String eventFullAddress;
+    @Column(length = 100)
+    private String eventNameChn;
 
     @Column(nullable = false)
     private Date eventStartTime = new Date();
@@ -23,12 +23,21 @@ public class Event {
     @Column(nullable = false)
     private Date eventEndTime = new Date();
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User organizer;
+    @Column(nullable = false)
+    private boolean isActive;
 
     @Column(nullable = false)
     private Date createTime = new Date();
 
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User organizer;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EventType EventTypes;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EventLocation eventLocation;
 }

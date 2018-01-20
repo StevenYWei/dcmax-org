@@ -162,11 +162,11 @@ public class User {
 
     public User() { }
 
-    public User(Long id, String username, String firstNameEng, String lastNameEng) {
-        this.id = id;
+    public User(String username, String password, String email, boolean activeStatus) {
         this.username = username;
-        this.firstNameEng = firstNameEng;
-        this.lastNameEng = lastNameEng;
+        this.email = email;
+        this.password = password;
+        this.isActive = activeStatus;
     }
 
     @Override
