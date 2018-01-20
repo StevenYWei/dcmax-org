@@ -84,6 +84,12 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_fieldPositions",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "fieldPosition_id")})
+    private Set<FieldPosition> fieldPositions = new HashSet<>();
+
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
@@ -173,6 +179,16 @@ public class User {
     public boolean hasRole(String role) {
         final String finalRole = role;
         return getRoles().stream().anyMatch(r -> r.getRoleName().equals(finalRole));
+    }
+
+    public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
+
+    public void setFieldPositions(Set<FieldPosition> fieldPositions) { this.fieldPositions = fieldPositions; }
+
+    public boolean hasFieldPosition(String fieldPosition) {
+        final String finalFieldPosition = fieldPosition;
+        return getFieldPositions().stream().anyMatch(r -> r.getFieldPositionEng().equals(finalFieldPosition))
+                || getFieldPositions().stream().anyMatch(r -> r.getFieldPositionChn().equals(finalFieldPosition));
     }
 
     public Set<Post> getPosts() { return posts; }
