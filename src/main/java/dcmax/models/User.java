@@ -63,6 +63,12 @@ public class User {
     @Column(length = 20)
     private String lastNameChn;
 
+    @Column(length = 20)
+    private String cellPhoneNumber;
+
+    @Column(length = 20)
+    private String homePhoneNumber;
+
     @Column(nullable = false)
     private boolean isActive;
 
@@ -100,6 +106,12 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getFirstNameEng() { return firstNameEng; }
 
     public void setFirstNameEng(String firstNameEng) {
@@ -130,10 +142,16 @@ public class User {
         this.lastNameChn = lastNameChn;
     }
 
-    public String getEmail() { return email; }
+    public String getCellPhoneNumber() { return cellPhoneNumber; }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCellPhoneNumber(String cellPhoneNumber) {
+        this.cellPhoneNumber = cellPhoneNumber;
+    }
+
+    public String getHomePhoneNumber() { return homePhoneNumber; }
+
+    public void setHomePhoneNumber(String homePhoneNumber) {
+        this.homePhoneNumber = homePhoneNumber;
     }
 
     public boolean isActive() { return isActive;}
@@ -151,6 +169,11 @@ public class User {
     public Set<Role> getRoles() { return roles; }
 
     public void setRoles(Set<Role> roles) { this.roles = roles; }
+
+    public boolean hasRole(String role) {
+        final String finalRole = role;
+        return getRoles().stream().anyMatch(r -> r.getRoleName().equals(finalRole));
+    }
 
     public Set<Post> getPosts() { return posts; }
 
