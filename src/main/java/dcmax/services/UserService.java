@@ -20,11 +20,11 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    void registerUser(User user);
+    void update(User user);
 
     boolean authenticate(String username, String password);
 
     boolean twoPasswordMatch(String password, String rePassword);
 
-//    User currentUser();
+    int deleteUser(String username);
 }

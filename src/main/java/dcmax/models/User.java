@@ -43,7 +43,7 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50)
     @Email(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;

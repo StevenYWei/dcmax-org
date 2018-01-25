@@ -5,8 +5,6 @@ import dcmax.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 //import org.springframework.security.authentication.AnonymousAuthenticationToken;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,13 +18,13 @@ import org.springframework.stereotype.Service;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-import java.util.Date;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 @Primary
-public class UserServiceJpaImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepo;
@@ -49,7 +47,7 @@ public class UserServiceJpaImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return this.userRepo.findByUsernameIgnoreCase(username);
+        return this.userRepo.findByUsername(username);
     }
 
     @Override
@@ -73,11 +71,12 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User user) {
-        userRepo.saveAndFlush(user);
-//        String insertUserSql = "insert into users value (?,?,?,?,?,?,?,?)";
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        jdbcTemplate.update(insertUserSql, new Object[]{});
+    public void update(User user) {
+        User oldUser = userRepo.findByUsername(user.getUsername());
+        Field[] fields = user.getClass().getDeclaredFields();
+
+        // TODO
+        userRepo.saveAndFlush(oldUser);
     }
 
     @Override
@@ -92,15 +91,8 @@ public class UserServiceJpaImpl implements UserService {
         return Objects.equals(password, rePassword);
     }
 
-//    @Override
-//    public User currentUser() {
-////        if (!isAuthenticated())
-////            return null;
-//
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//
-//        Authentication auth = securityContext.getAuthentication();
-//
-//        return userRepository.findByUsernameIgnoreCase(auth.getName());
-//    }
+
+    public int deleteUser(String username) {
+        return userRepo.deleteUserByUsername(username);
+    }
 }
