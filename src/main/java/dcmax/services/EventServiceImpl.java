@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EventServiceJpaImpl implements EventService {
+public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepo;
@@ -40,3 +40,4 @@ public class EventServiceJpaImpl implements EventService {
     }
 
 }
+
