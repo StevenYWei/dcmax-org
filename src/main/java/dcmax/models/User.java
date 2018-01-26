@@ -96,8 +96,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "organizer")
     private Set<Event> events = new HashSet<Event>();
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
-//    private Set<Team> teams = new HashSet<Team>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
+    private Set<Team> teams = new HashSet<Team>();
 
     public Long getId() { return id; }
 
@@ -201,6 +201,10 @@ public class User {
     public Set<Event> getEvents() { return events; }
 
     public void setEvents(Set<Event> events) { this.events = events; }
+
+    public Set<Team> getTeams() { return teams; }
+
+    public void setTeams(Set<Team> teams) { this.teams = teams; }
 
     public User() { }
 
