@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "eventtypes")
+@Table(name = "event_types")
 public class EventType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class EventType {
     //match
     //party
 
-    @OneToMany(mappedBy = "eventLocation")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventLocation")
     private Set<Event> events = new HashSet<Event>();
 
     public EventType() {}
