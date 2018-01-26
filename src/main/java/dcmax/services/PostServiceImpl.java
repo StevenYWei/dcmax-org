@@ -3,15 +3,13 @@ package dcmax.services;
 import dcmax.models.Post;
 import dcmax.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Primary
-public class PostServiceJpaImpl implements PostService {
+public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepo;
@@ -47,4 +45,3 @@ public class PostServiceJpaImpl implements PostService {
     }
 
 }
-
