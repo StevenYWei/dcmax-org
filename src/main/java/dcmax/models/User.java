@@ -90,11 +90,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "fieldPosition_id")})
     private Set<FieldPosition> fieldPositions = new HashSet<>();
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
-    @OneToMany(mappedBy = "organizer")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "organizer")
     private Set<Event> events = new HashSet<Event>();
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
+//    private Set<Team> teams = new HashSet<Team>();
 
     public Long getId() { return id; }
 

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "eventLocations")
+@Table(name = "event_locations")
 public class EventLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class EventLocation {
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
 
-    @OneToMany(mappedBy = "eventLocation")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventLocation")
     private Set<Event> events = new HashSet<Event>();
 
     public EventLocation() {}
