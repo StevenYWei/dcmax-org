@@ -14,17 +14,13 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
-    public interface CreateValidationGroup {
-    }
+    public interface CreateValidationGroup {}
 
-    public interface ChangeEmailValidationGroup {
-    }
+    public interface ChangeEmailValidationGroup {}
 
-    public interface ChangePasswordValidationGroup {
-    }
+    public interface ChangePasswordValidationGroup {}
 
-    public interface ProfileInfoValidationGroup {
-    }
+    public interface ProfileInfoValidationGroup {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +39,7 @@ public class User {
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     @Email(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
@@ -69,8 +65,8 @@ public class User {
     @Column(length = 20)
     private String homePhoneNumber;
 
-    @Column(nullable = false)
-    private boolean isActive;
+    @Column
+    private Boolean active = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
@@ -163,17 +159,21 @@ public class User {
         this.homePhoneNumber = homePhoneNumber;
     }
 
-    public boolean isActive() { return isActive;}
+    public Boolean getActive() {
+        return active;
+    }
 
-    public void setActive(boolean status) { this.isActive = status;}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public Date getCreateTime() { return createTime;}
 
     public void setCreateTime(Date createTime) { this.createTime = createTime;}
 
-    public Date getLastUpdateTime() { return lastUpdatedTime;}
+    public Date getLastUpdatedTime() { return lastUpdatedTime;}
 
-    public void setLastUpdateTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
+    public void setLastUpdatedTime(Date lastUpdatedTime) { this.lastUpdatedTime = lastUpdatedTime; }
 
     public Set<Role> getRoles() { return roles; }
 
@@ -212,7 +212,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.isActive = activeStatus;
+        this.active = activeStatus;
     }
 
     @Override

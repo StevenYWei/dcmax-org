@@ -2,6 +2,7 @@ package dcmax.services;
 
 import dcmax.models.User;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface UserService {
@@ -20,7 +21,7 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    void update(User user);
+    User update(User user) throws InvocationTargetException, IllegalAccessException;
 
     boolean authenticate(String username, String password);
 

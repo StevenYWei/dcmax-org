@@ -1,21 +1,15 @@
 package dcmax.controllers;
 
-import dcmax.forms.RegisterForm;
-import dcmax.models.Role;
 import dcmax.models.User;
-import dcmax.services.NotificationService;
 import dcmax.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.Date;
+import java.lang.reflect.InvocationTargetException;
+
+import static dcmax.utils.constants.UserConstants.FAIL_MSG;
+import static dcmax.utils.constants.UserConstants.SUCCESS_MSG;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -28,9 +22,8 @@ public class UserController {
     private Validator userValidator;
 
     @PostMapping(value = "/register")
-    public String registerNewUser(@RequestBody User user) {
-        userService.create(user);
-        return "success";
+    public User registerNewUser(@RequestBody User user) {
+        return userService.create(user);
     }
 
     @GetMapping(value = "/getUser/{username}")
@@ -40,20 +33,22 @@ public class UserController {
 
     @GetMapping(value = "/deleteUser/{username}")
     public String deleteUser(@PathVariable String username) {
-        userService.deleteUser(username);
-        return "success";
+        if(userService.deleteUser(username) == 1) {
+            return FAIL_MSG;
+        }
+        return SUCCESS_MSG;
     }
 
     @PostMapping(value = "/update")
-    public String updateUserInfo(@RequestBody User user) {
-        userService.update(user);
-        return "success";
+    public User updateUserInfo(@RequestBody User user)
+            throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        return userService.update(user);
     }
 
 
     @GetMapping(value = "/ping")
     public String userPing() {
-        return "Success! User serive is up and running!";
+        return "Success! User service is up and running!";
     }
 
 
