@@ -21,14 +21,24 @@ public class Team {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User captain;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teamMembers")
+    private Set<User> users = new HashSet<>();
+
     @Column(nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
 
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
+
+    public Team() {}
+
+    public Team(String teamNameEng, User captain) {
+        this.teamNameEng = teamNameEng;
+        this.captain = captain;
+    }
 
     public Long getId() { return id; }
 
@@ -68,7 +78,7 @@ public class Team {
     public String toString() {
         return "Team{" +
                 ", team name='" + teamNameEng + '\'' +
-                ", captain='" + captain.getFirstNameEng() + ' ' + captain.getLastNameEng()+ '\'' +
+                ", captain='" + captain.getFirstNameEng() + ' ' + captain.getLastNameEng() + '\'' +
                 ", lastUpdatedTime=" + lastUpdatedTime +
                 '}';
     }

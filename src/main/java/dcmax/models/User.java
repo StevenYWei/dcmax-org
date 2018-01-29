@@ -86,6 +86,12 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "fieldPosition_id")})
     private Set<FieldPosition> fieldPositions = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "team_members",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "team_id")})
+    private Set<Team> teamMembers = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
@@ -184,9 +190,23 @@ public class User {
         return getRoles().stream().anyMatch(r -> r.getRoleName().equals(finalRole));
     }
 
+    public boolean isCaptainOfTeam(Team team) { //TODO
+        final Team finalTeam = team;
+        return getTeams().stream().anyMatch(t -> t.getId().equals(team.getId()));
+    }
+
+    public boolean isInTeam(Team team) { //TODO
+        final Team finalTeam = team;
+        return getTeamMembers().stream().anyMatch(t -> t.getId().equals(team.getId()));
+    }
+
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
 
     public void setFieldPositions(Set<FieldPosition> fieldPositions) { this.fieldPositions = fieldPositions; }
+
+    public Set<Team> getTeamMembers() { return teamMembers; }
+
+    public void setTeamMembers(Set<Team> teamMembers) { this.teamMembers = teamMembers; }
 
     public boolean hasFieldPosition(String fieldPosition) {
         final String finalFieldPosition = fieldPosition;
