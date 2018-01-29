@@ -2,6 +2,8 @@ package dcmax.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -40,6 +42,12 @@ public class Event {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EventLocation eventLocation;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "event_teams",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "team_id")})
+    private Set<Team> teams = new HashSet<>();
 
     public Event() {}
 
@@ -82,6 +90,17 @@ public class Event {
     }
 
     public EventLocation getEventLocation() { return eventLocation;}
+
+    public Set<Team> getTeams() { return teams;}
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
+    public boolean hasTeam(Team team) {
+        final Team finalTeam = team;
+        return getTeams().stream().anyMatch(r -> r.getId().equals(finalTeam.getId()));
+    }
 
     public void setEventLocation(EventLocation eventLocation) {
         this.eventLocation = eventLocation;

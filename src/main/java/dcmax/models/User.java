@@ -192,12 +192,12 @@ public class User {
 
     public boolean isCaptainOfTeam(Team team) { //TODO
         final Team finalTeam = team;
-        return getTeams().stream().anyMatch(t -> t.getId().equals(team.getId()));
+        return getTeams().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
     }
 
     public boolean isInTeam(Team team) { //TODO
         final Team finalTeam = team;
-        return getTeamMembers().stream().anyMatch(t -> t.getId().equals(team.getId()));
+        return getTeamMembers().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
     }
 
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }

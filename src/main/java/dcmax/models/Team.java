@@ -24,6 +24,9 @@ public class Team {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teamMembers")
     private Set<User> users = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
+    private Set<Event> events = new HashSet<>();
+
     @Column(nullable = false)
     private boolean isActive = true;
 
@@ -60,6 +63,17 @@ public class Team {
 
     public void setCaptain(User captain) {
         this.captain = captain;
+    }
+
+    public Set<Event> getEVEnts() { return events;}
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public boolean isInEvent(Event event) {
+        final Event finalEvent = event;
+        return getEVEnts().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
     public boolean isActive() { return isActive;}
