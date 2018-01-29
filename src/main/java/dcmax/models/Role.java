@@ -16,7 +16,7 @@ public class Role {
     //member
     //captain
     //organizer
-    //management
+    //Admin
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "roles")

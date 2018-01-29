@@ -28,4 +28,8 @@ public interface UserService {
     boolean twoPasswordMatch(String password, String rePassword);
 
     int deleteUser(String username);
+
+    boolean isAdmin();
+
+    User currentUser();
 }

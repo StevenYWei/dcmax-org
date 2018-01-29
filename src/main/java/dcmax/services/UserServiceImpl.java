@@ -97,4 +97,22 @@ public class UserServiceImpl implements UserService {
         return userRepo.deleteUserByUsername(username);
     }
 
+    @Override
+    public boolean isAdmin() {
+        User user = currentUser();
+
+        return user != null && user.hasRole("Admin");
+    }
+
+    @Override
+    public User currentUser() { //TODO
+//        if (!isAuthenticated())
+//            return null;
+//
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//
+//        Authentication auth = securityContext.getAuthentication();
+//
+        return userRepo.findByUsername("");//TODO
+    }
 }
