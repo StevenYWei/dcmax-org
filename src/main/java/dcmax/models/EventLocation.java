@@ -35,7 +35,7 @@ public class EventLocation {
     private Date lastUsedTime = new Date();
 
     @Column(nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
