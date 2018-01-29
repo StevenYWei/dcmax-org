@@ -18,8 +18,7 @@ public class Role {
     //organizer
     //Admin
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
     public Role() {}
