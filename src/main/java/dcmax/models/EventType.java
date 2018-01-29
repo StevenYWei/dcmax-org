@@ -18,7 +18,7 @@ public class EventType {
     //match
     //party
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventLocation")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "eventType")
     private Set<Event> events = new HashSet<Event>();
 
     public EventType() {}
@@ -28,6 +28,12 @@ public class EventType {
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
+
+    public Set<Event> getEvents() { return events;}
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
 
     public String getEventType() { return eventType;}
 

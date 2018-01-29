@@ -64,6 +64,13 @@ public class EventLocation {
         this.locationNameChn = locationNameChn;
     }
 
+    public Set<Event> getEvents() { return events;}
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+
     public String getFullLocationAddress(){
         return address + ", " + city + ", " + state + ", " + zipcode;
     }

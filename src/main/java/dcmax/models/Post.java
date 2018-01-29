@@ -21,6 +21,9 @@ public class Post {
     private User author;
 
     @Column(nullable = false)
+    private boolean isActive = true;
+
+    @Column(nullable = false)
     private Date createTime = new Date();
 
     @Column(nullable = false)
@@ -30,7 +33,6 @@ public class Post {
 
     public void setId(Long id) {
         this.id = id;
-        setLastUpdateTime(new Date());
     }
 
     public String getTitle() { return title;}
@@ -50,6 +52,10 @@ public class Post {
     public void setAuthor(User author) {
         this.author = author;
     }
+
+    public boolean isActive() { return isActive;}
+
+    public void setActive(boolean status) { this.isActive = status;}
 
     public Date getCreateTime() { return createTime;}
 
