@@ -10,6 +10,8 @@ public interface UserService {
 
     List<User> findAll();
 
+    List<String> getUserList();
+
     User findById(Long id);
 
     User findByUsername(String username);

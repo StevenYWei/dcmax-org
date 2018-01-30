@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
@@ -19,6 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "delete from User u where u.username = :username")
     int deleteUserByUsername(@Param("username") String username);
 
+    @Query(value = "select u.username from User u")
+    List<String> getUserLsit();
 
 
 }

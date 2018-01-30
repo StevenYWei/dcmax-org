@@ -7,6 +7,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import static dcmax.utils.constants.UserConstants.FAIL_MSG;
 import static dcmax.utils.constants.UserConstants.SUCCESS_MSG;
@@ -45,6 +46,10 @@ public class UserController {
         return userService.update(user);
     }
 
+    @GetMapping(value = "/getUserList")
+    public List<String> getUsers() {
+        return userService.getUserList();
+    }
 
     @GetMapping(value = "/ping")
     public String userPing() {
