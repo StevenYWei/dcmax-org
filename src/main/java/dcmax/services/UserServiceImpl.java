@@ -1,5 +1,6 @@
 package dcmax.services;
 
+import dcmax.forms.LoginForm;
 import dcmax.models.User;
 import dcmax.repositories.UserRepository;
 import org.apache.commons.beanutils.BeanUtils;
@@ -81,9 +82,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean authenticate(String username, String password) {
-        User user = findByUsername(username);
-        return Objects.equals(user.getPassword(), password);
+    public boolean authenticate(LoginForm login) {
+        User userLoginInfo = findByUsername(login.getUsername());
+        return Objects.equals(userLoginInfo.getPassword(), login.getPassword());
     }
 
     @Override
