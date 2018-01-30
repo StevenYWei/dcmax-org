@@ -65,7 +65,7 @@ public class Team {
         this.captain = captain;
     }
 
-    public Set<Event> getEVEnts() { return events;}
+    public Set<Event> getEvents() { return events;}
 
     public void setEvents(Set<Event> events) {
         this.events = events;
@@ -73,7 +73,7 @@ public class Team {
 
     public boolean isInEvent(Event event) {
         final Event finalEvent = event;
-        return getEVEnts().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
+        return getEvents().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
     public boolean isActive() { return isActive;}

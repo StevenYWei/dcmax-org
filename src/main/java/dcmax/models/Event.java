@@ -49,6 +49,12 @@ public class Event {
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teams = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "event_participants",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> participants = new HashSet<>();
+
     public Event() {}
 
     public Long getId() { return id; }
@@ -100,6 +106,17 @@ public class Event {
     public boolean hasTeam(Team team) {
         final Team finalTeam = team;
         return getTeams().stream().anyMatch(r -> r.getId().equals(finalTeam.getId()));
+    }
+
+    public Set<User> getParticipants() { return participants;}
+
+    public void setParticipants(Set<User> participants) {
+        this.participants = participants;
+    }
+
+    public boolean hasParticipant(User participant) {
+        final User finalParticipant = participant;
+        return getParticipants().stream().anyMatch(r -> r.getId().equals(finalParticipant.getId()));
     }
 
     public void setEventLocation(EventLocation eventLocation) {

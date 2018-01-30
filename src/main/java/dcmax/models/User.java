@@ -92,6 +92,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teamMembers = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "participants")
+    private Set<Event> eventParticipants = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
@@ -198,6 +201,17 @@ public class User {
     public boolean isInTeam(Team team) { //TODO
         final Team finalTeam = team;
         return getTeamMembers().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
+    }
+
+    public Set<Event> getEventParticipants() { return eventParticipants;}
+
+    public void setEventParticipants(Set<Event> eventParticipants) {
+        this.eventParticipants = eventParticipants;
+    }
+
+    public boolean isInEvent(Event event) {
+        final Event finalEvent = event;
+        return getEventParticipants().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
