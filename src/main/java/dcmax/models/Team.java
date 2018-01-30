@@ -21,8 +21,11 @@ public class Team {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User captain;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teamMembers")
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "team_members",
+            joinColumns = {@JoinColumn(name = "team_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> members = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
     private Set<Event> events = new HashSet<>();
@@ -63,6 +66,17 @@ public class Team {
 
     public void setCaptain(User captain) {
         this.captain = captain;
+    }
+
+    public Set<User> getMembers() { return members;}
+
+    public void setMembers(Set<User> members) {
+        this.members = members;
+    }
+
+    public boolean hasMember(User member) {
+        final User finalMember = member;
+        return getMembers().stream().anyMatch(r -> r.getId().equals(finalMember.getId()));
     }
 
     public Set<Event> getEvents() { return events;}
