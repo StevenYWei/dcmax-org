@@ -40,7 +40,7 @@ public class Comment {
     }
 
     @Column(nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
@@ -110,9 +110,9 @@ public class Comment {
         this.childrenComments = childrenComments;
     }
 
-    public boolean isActive() { return isActive;}
+    public boolean getActive() { return active;}
 
-    public void setActive(boolean status) { this.isActive = status;}
+    public void setActive(boolean active) { this.active = active;}
 
     public Date getCreateTime() { return createTime;}
 

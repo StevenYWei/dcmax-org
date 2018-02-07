@@ -26,7 +26,7 @@ public class Event {
     private Date eventEndTime = new Date();
 
     @Column(nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
@@ -123,9 +123,9 @@ public class Event {
         this.eventLocation = eventLocation;
     }
 
-    public boolean isActive() { return isActive;}
+    public boolean getActive() { return active;}
 
-    public void setActive(boolean status) { this.isActive = status;}
+    public void setActive(boolean active) { this.active = active;}
 
     public Date getCreateTime() { return createTime;}
 

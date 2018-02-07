@@ -35,7 +35,7 @@ public class EventLocation {
     private Date lastUsedTime = new Date();
 
     @Column(nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @Column(nullable = false)
     private Date createTime = new Date();
@@ -86,9 +86,9 @@ public class EventLocation {
 
     public void setLastUsedTime(Date lastUsedTime) { this.lastUsedTime = lastUsedTime;}
 
-    public boolean isActive() { return isActive;}
+    public boolean getActive() { return active;}
 
-    public void setActive(boolean status) { this.isActive = status;}
+    public void setActive(boolean active) { this.active = active;}
 
     public Date getCreateTime() { return createTime;}
 
