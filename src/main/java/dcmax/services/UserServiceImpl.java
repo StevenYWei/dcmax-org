@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-//    @Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-//        user.getRoles().add(roleRepo.findByRoleName("Member"));
-        user.getRoles().add(new Role("Member"));
+        // TODO violate db constraint when register if added.
+//        user.getRoles().add(new Role("Member"));
 
         user.setActive(true);
 
@@ -123,8 +123,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean authenticate(LoginForm login) {
         User userLoginInfo = findByUsername(login.getUsername());
-        return passwordEncoder.matches(userLoginInfo.getPassword(), login.getPassword());
-//        return Objects.equals(userLoginInfo.getPassword(), login.getPassword());
+        return passwordEncoder.matches(login.getPassword(), userLoginInfo.getPassword());
     }
 
     @Override
