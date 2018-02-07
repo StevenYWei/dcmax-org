@@ -40,7 +40,7 @@ public class CommentServiceImpl implements CommentService{
 
         comment.setPost(post);
 
-        comment.setUser(userService.currentUser()); //TODO
+        comment.setUser(userService.currentUser());
 
         commentRepo.saveAndFlush(comment);
 

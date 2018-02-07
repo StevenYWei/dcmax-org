@@ -20,6 +20,8 @@ public interface UserService {
 
     User create(User user);
 
+    User register(User user);
+
     User edit(User user);
 
     void deleteById(Long id);
@@ -28,7 +30,11 @@ public interface UserService {
 
     boolean authenticate(LoginForm loginForm);
 
-    boolean twoPasswordMatch(String password, String rePassword);
+    void authenticate(User user);
+
+    boolean isAuthenticated();
+
+//    boolean twoPasswordMatch(String password, String rePassword); // please implement this on the front end
 
     int deleteUser(String username);
 
