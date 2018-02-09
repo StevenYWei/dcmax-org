@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "fieldPositions")
+@Table(name = "field_positions")
 public class FieldPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -34,8 +34,8 @@ public class Event {
     @Column(nullable = false)
     private Date lastUpdatedTime = new Date();
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User organizer;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "eventOrganizers")
+    private Set<User> organizers =  new HashSet<User>();
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EventType eventType;
@@ -47,13 +47,13 @@ public class Event {
     @JoinTable(name = "event_teams",
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
-    private Set<Team> teams = new HashSet<>();
+    private Set<Team> teams = new HashSet<Team>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "event_participants",
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> participants = new HashSet<>();
+    private Set<User> participants = new HashSet<User>();
 
     public Event() {}
 
@@ -83,10 +83,15 @@ public class Event {
 
     public void setEventEndTime(Date eventEndTime) { this.eventEndTime = eventEndTime;}
 
-    public User getOrganizer() { return organizer;}
+    public Set<User> getOrganizers() { return organizers;}
 
-    public void setOrganizer(User organizer) {
-        this.organizer = organizer;
+    public void setOrganizers(Set<User> organizers) {
+        this.organizers = organizers;
+    }
+
+    public boolean hasOrganizer(User organizer) {
+        final User finalOrganizer = organizer;
+        return getOrganizers().stream().anyMatch(r -> r.getId().equals(finalOrganizer.getId()));
     }
 
     public EventType getEventType() { return eventType;}

@@ -89,14 +89,17 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "members")
     private Set<Team> teamMembers = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "event_organizers",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "event_id")})
+    private Set<Event> eventOrganizers = new HashSet<Event>();
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "participants")
-    private Set<Event> eventParticipants = new HashSet<>();
+    private Set<Event> eventParticipants = new HashSet<Event>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "organizer")
-    private Set<Event> events = new HashSet<Event>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
     private Set<Team> teams = new HashSet<Team>();
@@ -211,6 +214,19 @@ public class User {
         return getEventParticipants().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
+    public Set<Event> getEventOrganizers() { return eventOrganizers; }
+
+    public void setEventOrganizers(Set<Event> eventOrganizers) { this.eventOrganizers = eventOrganizers; }
+
+    public boolean isOrganizeEvent(Event event) {
+        final Event finalEvent = event;
+        return getEventOrganizers().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
+    }
+
+    public Set<Team> getTeams() { return teams; }
+
+    public void setTeams(Set<Team> teams) { this.teams = teams; }
+
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
 
     public void setFieldPositions(Set<FieldPosition> fieldPositions) { this.fieldPositions = fieldPositions; }
@@ -228,14 +244,6 @@ public class User {
     public Set<Post> getPosts() { return posts; }
 
     public void setPosts(Set<Post> posts) { this.posts = posts; }
-
-    public Set<Event> getEvents() { return events; }
-
-    public void setEvents(Set<Event> events) { this.events = events; }
-
-    public Set<Team> getTeams() { return teams; }
-
-    public void setTeams(Set<Team> teams) { this.teams = teams; }
 
     public User() { }
 
