@@ -78,16 +78,16 @@ public class User {
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<Role>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_fieldPositions",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "fieldPosition_id")})
-    private Set<FieldPosition> fieldPositions = new HashSet<>();
+    private Set<FieldPosition> fieldPositions = new HashSet<FieldPosition>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "members")
-    private Set<Team> teamMembers = new HashSet<>();
+    private Set<Team> teamMembers = new HashSet<Team>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "event_organizers",

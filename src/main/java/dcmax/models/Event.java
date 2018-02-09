@@ -43,6 +43,9 @@ public class Event {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EventLocation eventLocation;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "event")
+    private Set<Match> matches = new HashSet<Match>();
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "event_teams",
             joinColumns = {@JoinColumn(name = "event_id")},
