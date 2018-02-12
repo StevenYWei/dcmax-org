@@ -19,10 +19,12 @@ public class Team {
     @Column(nullable = false, length = 30, unique = true)
     private String teamNameChn;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "captain_id", nullable = false)
     private User captain;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vice_captain_id")
     private User viceCaptain;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})

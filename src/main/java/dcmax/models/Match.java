@@ -21,15 +21,15 @@ public class Match {
     @JoinColumn(name = "team_guest_id", nullable = false)
     private Team teamGuest;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "referee_id")
     private User referee;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assist_referee1_id")
     private User assistReferee1;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assist_referee2_id")
     private User assistReferee2;
 

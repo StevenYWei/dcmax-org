@@ -102,11 +102,11 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
-    private Set<Team> teamCaptain = new HashSet<Team>();
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "viceCaptain")
-    private Set<Team> teamViceCaptain = new HashSet<Team>();
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
+//    private Set<Team> teamCaptain = new HashSet<Team>();
+//
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "viceCaptain")
+//    private Set<Team> teamViceCaptain = new HashSet<Team>();
 
     public Long getId() { return id; }
 
@@ -222,23 +222,23 @@ public class User {
         return getEventOrganizers().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
-    public Set<Team> getTeamCaptain() { return teamCaptain; }
-
-    public void setTeamCaptain(Set<Team> teamCaptain) { this.teamCaptain = teamCaptain; }
-
-    public boolean isTeamCaptain(Team team) {
-        final Team finalTeam = team;
-        return getTeamCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
-    }
-
-    public Set<Team> getTeamViceCaptain() { return teamViceCaptain; }
-
-    public void setTeamViceCaptain(Set<Team> teamViceCaptain) { this.teamViceCaptain = teamViceCaptain; }
-
-    public boolean isTeamViceCaptain(Team team) {
-        final Team finalTeam = team;
-        return getTeamViceCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
-    }
+//    public Set<Team> getTeamCaptain() { return teamCaptain; }
+//
+//    public void setTeamCaptain(Set<Team> teamCaptain) { this.teamCaptain = teamCaptain; }
+//
+//    public boolean isTeamCaptain(Team team) {
+//        final Team finalTeam = team;
+//        return getTeamCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
+//    }
+//
+//    public Set<Team> getTeamViceCaptain() { return teamViceCaptain; }
+//
+//    public void setTeamViceCaptain(Set<Team> teamViceCaptain) { this.teamViceCaptain = teamViceCaptain; }
+//
+//    public boolean isTeamViceCaptain(Team team) {
+//        final Team finalTeam = team;
+//        return getTeamViceCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
+//    }
 
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
 
