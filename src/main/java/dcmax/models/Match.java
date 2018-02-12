@@ -13,14 +13,16 @@ public class Match {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Event event;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_home_id", nullable = false)
     private Team teamHome;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_guest_id", nullable = false)
     private Team teamGuest;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "referee_id", nullable = false)
+    @JoinColumn(name = "referee_id")
     private User referee;
 
     @ManyToOne(fetch = FetchType.EAGER)

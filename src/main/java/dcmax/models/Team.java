@@ -34,11 +34,11 @@ public class Team {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
     private Set<Event> events = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamHome")
-    private Set<Match> matchHome = new HashSet<Match>();
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamGuest")
-    private Set<Match> matchGuest = new HashSet<Match>();
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamHome")
+//    private Set<Match> matchHome = new HashSet<Match>();
+//
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamGuest")
+//    private Set<Match> matchGuest = new HashSet<Match>();
 
     @Column(nullable = false)
     private boolean active = true;
@@ -111,13 +111,13 @@ public class Team {
         return getEvents().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
-    public Set<Match> getMatchHome() { return matchHome; }
-
-    public void setMatchmHome(Set<Match> matchHome) { this.matchHome = matchHome; }
-
-    public Set<Match> getMatchGuest() { return matchGuest; }
-
-    public void setMatchGuest(Set<Match> matchGuest) { this.matchGuest = matchGuest; }
+//    public Set<Match> getMatchHome() { return matchHome; }
+//
+//    public void setMatchmHome(Set<Match> matchHome) { this.matchHome = matchHome; }
+//
+//    public Set<Match> getMatchGuest() { return matchGuest; }
+//
+//    public void setMatchGuest(Set<Match> matchGuest) { this.matchGuest = matchGuest; }
 
     public boolean getActive() { return active;}
 
