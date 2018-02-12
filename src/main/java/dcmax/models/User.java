@@ -36,6 +36,7 @@ public class User {
             @Size(min = 6, message = "Password too short", groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class}),
             @Size(max = 80, message = "Password too long", groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     })
+
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
@@ -102,7 +103,10 @@ public class User {
     private Set<Post> posts = new HashSet<Post>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "captain")
-    private Set<Team> teams = new HashSet<Team>();
+    private Set<Team> teamCaptain = new HashSet<Team>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "viceCaptain")
+    private Set<Team> teamViceCaptain = new HashSet<Team>();
 
     public Long getId() { return id; }
 
@@ -193,12 +197,7 @@ public class User {
         return getRoles().stream().anyMatch(r -> r.getRoleName().equals(finalRole));
     }
 
-    public boolean isCaptainOfTeam(Team team) { //TODO
-        final Team finalTeam = team;
-        return getTeams().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
-    }
-
-    public boolean isInTeam(Team team) { //TODO
+    public boolean isInTeam(Team team) {
         final Team finalTeam = team;
         return getTeamMembers().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
     }
@@ -223,9 +222,23 @@ public class User {
         return getEventOrganizers().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
 
-    public Set<Team> getTeams() { return teams; }
+    public Set<Team> getTeamCaptain() { return teamCaptain; }
 
-    public void setTeams(Set<Team> teams) { this.teams = teams; }
+    public void setTeamCaptain(Set<Team> teamCaptain) { this.teamCaptain = teamCaptain; }
+
+    public boolean isTeamCaptain(Team team) {
+        final Team finalTeam = team;
+        return getTeamCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
+    }
+
+    public Set<Team> getTeamViceCaptain() { return teamViceCaptain; }
+
+    public void setTeamViceCaptain(Set<Team> teamViceCaptain) { this.teamViceCaptain = teamViceCaptain; }
+
+    public boolean isTeamViceCaptain(Team team) {
+        final Team finalTeam = team;
+        return getTeamViceCaptain().stream().anyMatch(t -> t.getId().equals(finalTeam.getId()));
+    }
 
     public Set<FieldPosition> getFieldPositions() { return fieldPositions; }
 

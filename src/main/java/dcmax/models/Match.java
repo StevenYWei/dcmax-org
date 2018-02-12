@@ -13,14 +13,23 @@ public class Match {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Event event;
 
-//    @Column(nullable = false)
-//    private Team teamHome;
-//
-//    @Column(nullable = false)
-//    private Team teamGuest;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Team teamHome;
 
-//    @Column
-//    User referees;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Team teamGuest;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "referee_id", nullable = false)
+    private User referee;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "assist_referee1_id")
+    private User assistReferee1;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "assist_referee2_id")
+    private User assistReferee2;
 
     @Column
     private Boolean active = true;
@@ -41,13 +50,37 @@ public class Match {
         this.event = event;
     }
 
-//    public Team getTeamHome(){return teamHome; }
-//
-//    public Team setTeamHome(Team teamHome){return this.teamHome = teamHome; }
-//
-//    public Team getTeamGuest(){return teamGuest; }
-//
-//    public Team setTeamGuest(Team teamGuest){return this.teamGuest = teamGuest; }
+    public Team getTeamHome(){return teamHome; }
+
+    public Team setTeamHome(Team teamHome){return this.teamHome = teamHome; }
+
+    public Team getTeamGuest(){return teamGuest; }
+
+    public Team setTeamGuest(Team teamGuest){return this.teamGuest = teamGuest; }
+
+    public User getReferee() {
+        return referee;
+    }
+
+    public void setReferee(User referee) {
+        this.referee = referee;
+    }
+
+    public User getAssistReferee1() {
+        return assistReferee1;
+    }
+
+    public void setAssistReferee1(User assistReferee1) {
+        this.assistReferee1 = assistReferee1;
+    }
+
+    public User getAssistReferee2() {
+        return assistReferee2;
+    }
+
+    public void setAssistReferee2(User assistReferee2) {
+        this.assistReferee2 = assistReferee2;
+    }
 
     public boolean getActive() { return active;}
 
@@ -67,10 +100,10 @@ public class Match {
 
     public Match() {}
 
-//    public Match(Event event, Team teamHome, Team teamGuest) {
-//        this.event = event;
-//        this.teamHome = teamHome;
-//        this.teamGuest = teamGuest;
-//    }
+    public Match(Event event, Team teamHome, Team teamGuest) {
+        this.event = event;
+        this.teamHome = teamHome;
+        this.teamGuest = teamGuest;
+    }
 
 }

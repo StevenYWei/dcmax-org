@@ -3,6 +3,7 @@ package dcmax.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,9 @@ public class Team {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User captain;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User viceCaptain;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "team_members",
             joinColumns = {@JoinColumn(name = "team_id")},
@@ -29,6 +33,12 @@ public class Team {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
     private Set<Event> events = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamHome")
+    private Set<Match> matchHome = new HashSet<Match>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamGuest")
+    private Set<Match> matchGuest = new HashSet<Match>();
 
     @Column(nullable = false)
     private boolean active = true;
@@ -68,6 +78,17 @@ public class Team {
         this.captain = captain;
     }
 
+    public void transitionCaptainship(User newCaptain) {
+        if(!Objects.equals(this.captain, newCaptain))
+            this.captain = newCaptain;
+    }
+
+    public User getViceCaptain() { return viceCaptain;}
+
+    public void setViceCaptain(User viceCaptain) {
+        this.viceCaptain = viceCaptain;
+    }
+
     public Set<User> getMembers() { return members;}
 
     public void setMembers(Set<User> members) {
@@ -89,6 +110,14 @@ public class Team {
         final Event finalEvent = event;
         return getEvents().stream().anyMatch(r -> r.getId().equals(finalEvent.getId()));
     }
+
+    public Set<Match> getMatchHome() { return matchHome; }
+
+    public void setMatchmHome(Set<Match> matchHome) { this.matchHome = matchHome; }
+
+    public Set<Match> getMatchGuest() { return matchGuest; }
+
+    public void setMatchGuest(Set<Match> matchGuest) { this.matchGuest = matchGuest; }
 
     public boolean getActive() { return active;}
 
