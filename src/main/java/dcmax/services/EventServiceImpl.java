@@ -36,7 +36,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event create(Event event) {
 
-        if (!userService.isEventOrganizer() ) {
+        if (!userService.isEventOrganizer() && !userService.isAdmin()) {
             throw new ForbiddenException();
         }
         return this.eventRepo.save(event);
