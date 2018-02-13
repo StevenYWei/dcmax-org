@@ -27,6 +27,10 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 30, unique = true)
+    @Size.List({
+            @Size(min = 6, message = "Username too short", groups = {CreateValidationGroup.class}),
+            @Size(max = 30, message = "Username too long", groups = {CreateValidationGroup.class})
+    })
     @NotBlank(groups = {CreateValidationGroup.class})
     @Pattern(regexp = "^[\\p{L}0-9\\._\\- ]+$", groups = {CreateValidationGroup.class})
     private String username;
@@ -36,11 +40,10 @@ public class User {
             @Size(min = 6, message = "Password too short", groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class}),
             @Size(max = 80, message = "Password too long", groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     })
-
     @NotBlank(groups = {CreateValidationGroup.class, ChangePasswordValidationGroup.class})
     private String password;
 
-    @Column(length = 50, unique = true) // TODO: to add back: nullable = false -- removed for testing purpose
+    @Column(length = 50, unique = true) // TODO: to add back: nullable = false -- removed temporarily for testing purpose
     @Email(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     @NotBlank(groups = {CreateValidationGroup.class, ChangeEmailValidationGroup.class})
     private String email;
