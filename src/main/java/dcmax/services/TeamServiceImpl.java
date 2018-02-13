@@ -1,6 +1,7 @@
 package dcmax.services;
 
 import dcmax.models.Event;
+import dcmax.models.Role;
 import dcmax.models.Team;
 import dcmax.repositories.EventRepository;
 import dcmax.repositories.TeamRepository;
@@ -33,6 +34,7 @@ public class TeamServiceImpl implements TeamService{
 
     @Override
     public Team create(Team team){
+        team.getCaptain().getRoles().add(new Role("CAPTAIN"));
         return this.teamRepo.save(team);
     }
 }
