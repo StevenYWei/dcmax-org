@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
     public boolean isAdmin() {
         User user = currentUser();
 
-        return user != null && user.hasRole("Admin");
+        return user != null && user.hasRole("ADMIN");
     }
 
     @Override
