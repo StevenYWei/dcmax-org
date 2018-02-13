@@ -40,5 +40,7 @@ public interface UserService {
 
     boolean isAdmin();
 
+    boolean isEventOrganizer();
+
     User currentUser();
 }

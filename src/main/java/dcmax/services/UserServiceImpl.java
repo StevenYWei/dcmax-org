@@ -164,6 +164,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isEventOrganizer() {
+        User user = currentUser();
+
+        return user != null && user.hasRole("ORGANIZER");
+    }
+
+    @Override
     public User currentUser() {
         if (!isAuthenticated())
             return null;

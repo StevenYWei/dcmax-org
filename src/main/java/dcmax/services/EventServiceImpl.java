@@ -1,5 +1,6 @@
 package dcmax.services;
 
+import dcmax.controllers.ForbiddenException;
 import dcmax.models.Event;
 import dcmax.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepo;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<Event> findAll() {
@@ -31,6 +35,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event create(Event event) {
+
+        if (!userService.isEventOrganizer() ) {
+            throw new ForbiddenException();
+        }
         return this.eventRepo.save(event);
     }
 
