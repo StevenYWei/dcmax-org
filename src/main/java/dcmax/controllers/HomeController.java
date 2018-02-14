@@ -26,4 +26,10 @@ public class HomeController {
 
         return "index";
     }
+
+    //Vue app entry point
+    @RequestMapping(value = "/app/")
+    public String app() {
+        return "app/index";
+    }
 }
