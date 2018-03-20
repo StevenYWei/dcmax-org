@@ -26,9 +26,9 @@
     <input id="password" type="password" name="password" th:value="*{password}"/>
     <span class="formError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</span>
 
-    <div><label for="rePassword" th:value="*{rePassword}">Repeat password:</label></div>
-    <input id="rePassword" type="password" name="rePassword" th:value="*{rePassword}"/>
-    <span class="formError" th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">Passwords don't
+    <div><label for="passwordConfirmation" th:value="*{passwordConfirmation}">Repeat password:</label></div>
+    <input id="passwordConfirmation" type="password" name="passwordConfirmation" th:value="*{passwordConfirmation}"/>
+    <span class="formError" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}">Passwords don't
                                                                                                  match!</span>
 
     <!--<div><label for="firstName">First Name:</label></div>-->

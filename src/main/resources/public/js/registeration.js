@@ -51,7 +51,7 @@ $(document).ready(function() {
                 required: true,
                 minlength: 6
             },
-            rePassword: {
+            passwordConfirmation: {
                 required: true,
                 equalTo: "#password"
             }
@@ -74,7 +74,7 @@ $(document).ready(function() {
                 required: "Enter password",
                 minlength: "Password too short"
             },
-            rePassword: {
+            passwordConfirmation: {
                 required: "Enter password",
                 equalTo: "Passwords do not match"
             }

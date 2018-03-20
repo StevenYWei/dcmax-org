@@ -14,7 +14,7 @@ public class RegisterForm {
 
     @NotNull
     @Size(min = 1, max = 50)
-    private String rePassword;
+    private String passwordConfirmation;
 
     @NotNull
     @Size(min = 1, max = 50)
@@ -36,12 +36,12 @@ public class RegisterForm {
         this.password = password;
     }
 
-    public String getRePassword() {
-        return rePassword;
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
     }
 
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
     }
 
     public String getEmail() {

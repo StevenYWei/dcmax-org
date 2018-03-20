@@ -16,6 +16,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u from User u where u.username = :username")
     User findByUsername(@Param("username") String username);
 
+    @Query(value = "select u from User u where u.email = :email")
+    User findByEmail(@Param("email") String email);
+
     @Query(value = "select u from User u where u.username = :username or u.email = :email")
     User findByUsernameOrEmail(@Param("username") String username, @Param("email") String email);
 
@@ -26,6 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select u.username from User u")
     List<String> getUserLsit();
+
 
 }
 

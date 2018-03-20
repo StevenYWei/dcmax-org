@@ -83,6 +83,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return this.userRepo.findByEmail(email);
+    }
+
+    @Override
+    public boolean userEmailExists(String email) {
+        return findByEmail(email) != null;
+    }
+
+    @Override
     public User create(User user) {
         return this.register(user);
     }
@@ -146,9 +156,9 @@ public class UserServiceImpl implements UserService {
 
 //    please implement this on the front end
 //    @Override
-//    public boolean twoPasswordMatch(String password, String rePassword) {
-//        // Provide a sample password check: password == rePassword
-//        return Objects.equals(password, rePassword);
+//    public boolean twoPasswordMatch(String password, String passwordConfirmation) {
+//        // Provide a sample password check: password == passwordConfirmation
+//        return Objects.equals(password, passwordConfirmation);
 //    }
 
     @Override

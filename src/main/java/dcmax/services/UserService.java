@@ -18,6 +18,10 @@ public interface UserService {
 
     boolean usernameExists(String username);
 
+    User findByEmail(String email);
+
+    boolean userEmailExists(String email);
+
     User create(User user);
 
     User register(User user);
@@ -34,7 +38,7 @@ public interface UserService {
 
     boolean isAuthenticated();
 
-//    boolean twoPasswordMatch(String password, String rePassword); // please implement this on the front end
+//    boolean twoPasswordMatch(String password, String passwordConfirmation); // please implement this on the front end
 
     int deleteUser(String username);
 
