@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import static dcmax.utils.constants.UserConstants.FAIL_MSG;
 import static dcmax.utils.constants.UserConstants.SUCCESS_MSG;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
