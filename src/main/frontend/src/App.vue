@@ -1,23 +1,37 @@
 <template>
   <div id="app">
-    <img src="./assets/dcmax-icon.png">
-    <router-view/>
+    <auth-layout></auth-layout>
   </div>
 </template>
 
 <script>
+import AuthLayout from '@/components/layout/AuthLayout'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AuthLayout
+  }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import "~normalize.css";
+@import "assets/sass/mixins";
+@import "assets/sass/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "assets/sass/_icons-styles.scss";
+@import "assets/sass/base";
+@import "assets/sass/typography";
+@import "assets/sass/icons";
+@import "assets/sass/material-forms";
+@import "assets/sass/override-bootstrap";
+@import "assets/sass/override-custom-libs";
+
+  body {
+    height: 100%;
+    #app {
+      height:100%;
+    }
+  }
 </style>

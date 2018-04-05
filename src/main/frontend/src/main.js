@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import VueResource from 'vue-resource'
-import Register from './components/Register'
 import router from './router'
 
 Vue.config.productionTip = false
@@ -15,6 +14,10 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  mounted () {
+    const html = document.documentElement
+    html.setAttribute('lang', 'en')
+  }
 })
 
